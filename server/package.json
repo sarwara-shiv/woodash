@@ -1,0 +1,19 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "electron.js",
+  "scripts": {
+    "start": "electron .",                      
+    "dev:watch": "concurrently \"npm run start:react\" \"npm run start:electron\"",
+    "start:react": "cd ../client && npm start",  
+    "start:electron": "nodemon --exec electron . --watch server --ext js,json,html"  
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "electron": "^27.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "nodemon": "^3.1.9"
+  }
+}
