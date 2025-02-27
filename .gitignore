@@ -44,3 +44,4 @@ server/electron_modules/
 # Other files to ignore
 *.bak
 *.swp
+TODO.md
