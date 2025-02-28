@@ -3,21 +3,25 @@ const path = require("path");
 require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 let mainWindow;
+let isMovingWindow = false;
+let offsetX = 0;
+let offsetY = 0;
 
 app.whenReady().then(() => {
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
-    frame:false,
+    frame: false,
     webPreferences: {
       nodeIntegration: false,
-      contextIsolation:true,
-      preload:__dirname+"/preload.js" 
+      contextIsolation: true,
+      preload: path.join(__dirname, 'preload.js'),
     },
   });
 
-  // Load React App (Development or Production)
   if (process.env.ENV === "development") {
+    // Open Developer Tools
+  mainWindow.webContents.openDevTools();
     mainWindow.loadURL("http://localhost:3000");
   } else {
     mainWindow.loadFile(path.join(__dirname, "../client/build/index.html"));
@@ -26,12 +30,31 @@ app.whenReady().then(() => {
   mainWindow.on("closed", () => {
     mainWindow = null;
   });
-});
 
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    app.quit();
-  }
+  // Handle window dragging
+  ipcMain.on("window:move", (event, { clientX, clientY, offsetX: ox, offsetY: oy }) => {
+    if (!isMovingWindow) {
+      offsetX = clientX - mainWindow.getBounds().x;
+      offsetY = clientY - mainWindow.getBounds().y;
+      isMovingWindow = true;
+    }
+
+    const newX = clientX - offsetX;
+    const newY = clientY - offsetY;
+
+    // Set the window's new position
+    mainWindow.setBounds({
+      x: newX,
+      y: newY,
+      width: mainWindow.getBounds().width,
+      height: mainWindow.getBounds().height,
+    });
+  });
+
+  // Stop moving the window
+  ipcMain.on("window:stopMove", () => {
+    isMovingWindow = false;
+  });
 });
 
 // IPC handlers for window control
