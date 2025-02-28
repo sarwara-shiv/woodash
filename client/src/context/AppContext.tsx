@@ -4,6 +4,8 @@ import React, { createContext, useState, ReactNode, useContext } from "react";
 interface AppContextType {
   pageTitle: string;
   setPageTitle: (title: string) => void;
+  isSidebarOpen: boolean;
+  setIsSidebarOpen: (isOpen: boolean) => void;
   currentPage: string;
   setCurrentPage: (page: string) => void;
   language: string;
@@ -14,6 +16,8 @@ interface AppContextType {
 const defaultState: AppContextType = {
   pageTitle: "Home",
   setPageTitle: () => {},
+  isSidebarOpen: true,
+  setIsSidebarOpen: () => {},
   currentPage: "Dashboard",
   setCurrentPage: () => {},
   language: "en",
@@ -28,12 +32,16 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const [pageTitle, setPageTitle] = useState<string>("Home");
   const [currentPage, setCurrentPage] = useState<string>("Dashboard");
   const [language, setLanguage] = useState<string>("en");
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+
 
   return (
     <AppContext.Provider
       value={{
         pageTitle,
         setPageTitle,
+        isSidebarOpen,
+        setIsSidebarOpen,
         currentPage,
         setCurrentPage,
         language,

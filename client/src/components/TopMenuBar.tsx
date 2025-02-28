@@ -3,17 +3,20 @@ import packageJson from '../../package.json'; // Import the version from package
 import { IoMdClose } from "react-icons/io";
 import { VscChromeMaximize } from "react-icons/vsc";
 import { MdMinimize } from "react-icons/md";
+import LanguageSelector from './LanguageSelector';
 
 interface MenuBarProps {
   title: string;
 }
 
-const TopMenuBar: React.FC<MenuBarProps> = ({ title }) => {
+const TopMenuBar: React.FC = () => {
   const menuBarRef = useRef<HTMLDivElement>(null);
   let isDragging = useRef(false);
   let offsetX = useRef(0);
   let offsetY = useRef(0);
   let lastMoveTime = useRef(0);  // To throttle the move updates
+
+  const commonStyles = 'w-6 h-6 flex hover:bg-white justify-center items-center transition-all ease hover:text-primary'
 
   // Window control functions
   const handleMinimize = () => {
@@ -26,10 +29,6 @@ const TopMenuBar: React.FC<MenuBarProps> = ({ title }) => {
 
   const handleClose = () => {
     (window as any).electron.close(); // Electron close function
-  };
-
-  const handleOpen = () => {
-    (window as any).electron.open(); // Example for open window function if needed
   };
 
   // Drag functionality - Make the Top Menu Bar draggable
@@ -96,35 +95,38 @@ const TopMenuBar: React.FC<MenuBarProps> = ({ title }) => {
   return (
     <div
       ref={menuBarRef}
-      className="flex items-center justify-between bg-gray-200 text-gray-800 p-2 shadow-md sticky top-0 z-50 cursor-move"
+      className="flex items-center justify-between bg-gray-200 text-gray-800 p-2 sticky top-0 z-50 cursor-move"
     >
       {/* Left section: Title and Version */}
       <div className="flex items-center space-x-2 flex-row">
         <div className='flex items-center flex-row space-x-2'>
-            <h1 className="text-lg font-semibold">WOOdash</h1>
+            <h1 className="text-lg font-semibold text-primary">WooDash</h1>
             <span className="text-sm opacity-70">v{packageJson.version}</span>
         </div>
-        <div>|</div>
-        <h1 className="text-lg font-semibold">{title}</h1>
+        {/* <div>|</div>
+        <h1 className="text-lg font-semibold">{title}</h1> */}
       </div>
 
       {/* Right section: Open, Minimize, Maximize, Close */}
-      <div className="flex space-x-2">
+      <div className="flex space-x-1">
+        <div className='mr-2'>
+            <LanguageSelector />
+        </div>
         <button
           onClick={handleMinimize}
-          className="w-6 h-6 flex hover:bg-gray-300 justify-center items-center"
+          className={`${commonStyles}`}
         >
           <span className="text-xs"><MdMinimize/></span>
         </button>
         <button
           onClick={handleMaximize}
-          className="w-6 h-6 flex hover:bg-gray-300 justify-center items-center"
+          className={`${commonStyles}`}
         >
           <span className="text-xs"><VscChromeMaximize /></span>
         </button>
         <button
           onClick={handleClose}
-          className="w-6 h-6 flex hover:bg-gray-300 justify-center items-center"
+          className={`${commonStyles}`}
         >
           <span className="text-xs"><IoMdClose /> </span>
         </button>

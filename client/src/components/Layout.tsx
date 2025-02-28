@@ -1,48 +1,81 @@
-import React, { ReactNode, useEffect } from "react";
+import React, { useState } from "react";
 import { useAppContext } from "../context/AppContext"; // Import the custom hook
 import Header from "./Header";
 import Footer from "./Footer";
 import Sidebar from "./Sidebar";
-import { useTranslation } from "react-i18next";
 import TopMenuBar from "./TopMenuBar";
 
 interface LayoutProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const { pageTitle, setPageTitle, currentPage, setCurrentPage, language, setLanguage } = useAppContext();  // Access context state
-  const { t, i18n } = useTranslation();
-
-  const handleLanguageChange = (lang: string) => {
-    setLanguage(lang);  // Update language state
-  };
-
-  useEffect(() => {
-    // Example: Set page title based on the current page
-    if (currentPage === "Dashboard") {
-      setPageTitle("Dashboard Page");
-    } else {
-      setPageTitle("Other Page");
-    }
-  }, [currentPage, setPageTitle]);
+  const {isSidebarOpen } = useAppContext();
 
   return (
-    <div className="layout">
-      <TopMenuBar title="My App" />
+    <div className="layout h-screen flex flex-col">
+      {/* Top Menu Bar */}
+      <TopMenuBar />
+
+      {/* Header (Fixed Below Top Menu Bar) */}
       <Header />
-      <div className="main-content mt-16"> {/* Add margin-top to prevent overlap */}
-        <Sidebar />
-        <main className="content">
-          <div>
-            <h2>{pageTitle}</h2> {/* Display the current page title */}
-            <button onClick={() => { i18n.changeLanguage("en"); handleLanguageChange("en"); }}>English</button>
-            <button onClick={() => { i18n.changeLanguage("de"); handleLanguageChange("de"); }}>German</button>
-          </div>
+
+      {/* Main Content Area */}
+      <div className="flex flex-1 overflow-y-auto mb-8">
+        {/* Sidebar Toggle Button */}
+
+        {/* Sidebar (Conditionally render based on state) */}
+        {/* {isSidebarOpen && (
+        )} */}
+        <Sidebar /> 
+
+        {/* Main Content */}
+        <main className={`flex-1 ml-64 mt-5 mb-14 px-2 transition-all ease duration-100 ${isSidebarOpen ? "ml-[200px]" : "ml-[0px]"}`}>
           {children}
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>1</p>
+          <p>120</p>
+         
         </main>
       </div>
-      <Footer />
+
+      {/* Footer (Fixed at Bottom) */}
+      <Footer/>
     </div>
   );
 };
