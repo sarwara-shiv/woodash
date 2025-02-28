@@ -32,45 +32,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         {/* Main Content */}
         <main className={`flex-1 ml-64 mt-5 mb-14 px-2 transition-all ease duration-100 ${isSidebarOpen ? "ml-[200px]" : "ml-[0px]"}`}>
           {children}
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>1</p>
-          <p>120</p>
-         
         </main>
       </div>
 

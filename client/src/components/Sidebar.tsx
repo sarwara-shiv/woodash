@@ -1,5 +1,6 @@
 import React from "react";
 import { useAppContext } from "../context/AppContext";
+import { SiWoo } from "react-icons/si";
 
 const Sidebar: React.FC = () => {
     const {isSidebarOpen} = useAppContext();
@@ -10,6 +11,14 @@ const Sidebar: React.FC = () => {
     `}>
       <div className="mb-2 text-lg font-bold">
         Menu
+      </div>
+      <div className="mb-2 text-sm  my-1 py-1 bg-white rounded-md">
+        <ul>
+          <li className={`${navStyles}`}>WooCommerce</li>
+          <li className={`${navStyles}`}>Lieferando</li>
+          <li className={`${navStyles}`}>Wolt</li>
+          <li className={`${navStyles}`}>Übereats</li>
+        </ul>
       </div>
       
       {/* The second div will take the remaining space and scroll if content overflows */}
