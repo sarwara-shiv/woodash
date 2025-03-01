@@ -8,6 +8,8 @@ interface AppContextType {
   setIsSidebarOpen: (isOpen: boolean) => void;
   isUserAuthenticated: boolean;
   setIsUserAuthenticated: (isAuthenticated: boolean) => void;
+  isLicenseValid: boolean;
+  setIsLicenseValid: (licenseStatus: boolean) => void;
   currentPage: string;
   setCurrentPage: (page: string) => void;
   language: string;
@@ -22,6 +24,8 @@ const defaultState: AppContextType = {
   setIsSidebarOpen: () => {},
   isUserAuthenticated: true,
   setIsUserAuthenticated: () => {},
+  isLicenseValid: true,
+  setIsLicenseValid: () => {},
   currentPage: "Dashboard",
   setCurrentPage: () => {},
   language: "en",
@@ -38,6 +42,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const [language, setLanguage] = useState<string>("en");
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const [isUserAuthenticated, setIsUserAuthenticated] = useState<boolean>(true);
+  const [isLicenseValid, setIsLicenseValid] = useState<boolean>(true);
 
 
   return (
@@ -47,6 +52,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         setPageTitle,
         isUserAuthenticated,
         setIsUserAuthenticated,
+        isLicenseValid,
+        setIsLicenseValid,
         isSidebarOpen,
         setIsSidebarOpen,
         currentPage,

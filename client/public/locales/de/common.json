@@ -1,4 +1,10 @@
 {
-    "welcome": "Willkommen to my App!",
-    "changeLanguage": "Change Language"
-  }
+  "welcome": "Willkommen to my App!",
+  "changeLanguage": "Change Language",
+  "home":"Home",
+  "home_label":"Home",
+  "dashboard":"Dashboard",
+  "dashboard_label":"Dashboard",
+  "settings":"Settings",
+  "settings_label":"Settings"
+}

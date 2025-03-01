@@ -100,7 +100,7 @@ const TopMenuBar: React.FC = () => {
       {/* Left section: Title and Version */}
       <div className="flex items-center space-x-2 flex-row">
         <div className='flex items-center flex-row space-x-2'>
-            <h1 className="text-lg font-semibold text-primary">WooDash</h1>
+            <h1 className="text-lg font-semibold text-primary">{process.env.REACT_APP_NAME} </h1>
             <span className="text-sm opacity-70">v{packageJson.version}</span>
         </div>
         {/* <div>|</div>
